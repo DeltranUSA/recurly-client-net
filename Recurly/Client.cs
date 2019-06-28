@@ -1410,7 +1410,7 @@ namespace Recurly
         }
 
         /// <summary>
-        /// List a invoice's line items <see href="https://partner-docs.recurly.com/v2018-06-06#operation/list_invoice_line_items">list_invoice_line_items api documentation</see>
+        /// List an invoice's line items <see href="https://partner-docs.recurly.com/v2018-06-06#operation/list_invoice_line_items">list_invoice_line_items api documentation</see>
         /// </summary>
         /// <param name="invoiceId">Invoice ID or number (use prefix: `number-`, e.g. `number-1000`).</param>
         /// <param name="ids">Filter results by their IDs. Up to 200 IDs can be passed at once using  commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.    **Important notes:**    * The `ids` parameter cannot be used with any other ordering or filtering    parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)  * Invalid or unknown IDs will be ignored, so you should check that the    results correspond to your request.  * Records are returned in an arbitrary order. Since results are all    returned at once you can sort the records yourself.  </param>
