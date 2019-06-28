@@ -17,7 +17,7 @@ namespace Recurly.Resources
 
 
         [JsonProperty("account")]
-        public AccountCreate Account { get; set; }
+        public AccountPurchase Account { get; set; }
 
         /// <value>Collection method</value>
         [JsonProperty("collection_method")]
@@ -49,7 +49,7 @@ namespace Recurly.Resources
 
         /// <value>A list of one time charges or credits to be created with the purchase.</value>
         [JsonProperty("line_items")]
-        public List<PurchaseLineItemCreate> LineItems { get; set; }
+        public List<LineItemCreate> LineItems { get; set; }
 
         /// <value>Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.</value>
         [JsonProperty("net_terms")]
@@ -59,13 +59,17 @@ namespace Recurly.Resources
         [JsonProperty("po_number")]
         public string PoNumber { get; set; }
 
+
+        [JsonProperty("shipping_address")]
+        public ShippingAddressCreate ShippingAddress { get; set; }
+
         /// <value>Assign a shipping address from the account's existing shipping addresses. If this and `shipping_address` are both present, `shipping_address` will take precedence.</value>
         [JsonProperty("shipping_address_id")]
         public string ShippingAddressId { get; set; }
 
         /// <value>A list of subscriptions to be created with the purchase.</value>
         [JsonProperty("subscriptions")]
-        public List<PurchaseSubscriptionCreate> Subscriptions { get; set; }
+        public List<SubscriptionPurchase> Subscriptions { get; set; }
 
         /// <value>Terms and conditions to be put on the purchase invoice.</value>
         [JsonProperty("terms_and_conditions")]

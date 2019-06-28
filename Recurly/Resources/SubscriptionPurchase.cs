@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace Recurly.Resources
 {
     [ExcludeFromCodeCoverage]
-    public class PurchaseSubscriptionCreate : Request
+    public class SubscriptionPurchase : Request
     {
 
         /// <value>Add-ons</value>
@@ -47,13 +47,9 @@ namespace Recurly.Resources
         [JsonProperty("renewal_billing_cycles")]
         public int? RenewalBillingCycles { get; set; }
 
-
-        [JsonProperty("shipping_address")]
-        public ShippingAddressCreate ShippingAddress { get; set; }
-
-        /// <value>Assign a shipping address from the account's existing shipping addresses. If this and `shipping_address` are both present, `shipping_address` will take precedence.</value>
-        [JsonProperty("shipping_address_id")]
-        public string ShippingAddressId { get; set; }
+        /// <value>Create a shipping address on the account and assign it to the subscription.</value>
+        [JsonProperty("shipping")]
+        public SubscriptionShippingPurchase Shipping { get; set; }
 
         /// <value>The number of cycles/billing periods in a term. When `remaining_billing_cycles=0`, if `auto_renew=true` the subscription will renew and a new term will begin, otherwise the subscription will expire.</value>
         [JsonProperty("total_billing_cycles")]

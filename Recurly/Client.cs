@@ -1262,6 +1262,57 @@ namespace Recurly
         }
 
         /// <summary>
+        /// List a site's items <see href="https://partner-docs.recurly.com/v2019-01-08#operation/list_items">list_items api documentation</see>
+        /// </summary>
+        /// <param name="ids">Filter results by their IDs. Up to 200 IDs can be passed at once using  commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.    **Important notes:**    * The `ids` parameter cannot be used with any other ordering or filtering    parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)  * Invalid or unknown IDs will be ignored, so you should check that the    results correspond to your request.  * Records are returned in an arbitrary order. Since results are all    returned at once you can sort the records yourself.  </param>
+        /// <param name="limit">Limit number of records 1-200.</param>
+        /// <param name="order">Sort order.</param>
+        /// <param name="sort">Sort field. You *really* only want to sort by `updated_at` in ascending  order. In descending order updated records will move behind the cursor and could  prevent some records from being returned.  </param>
+        /// <param name="beginTime">Filter by begin_time when `sort=created_at` or `sort=updated_at`.  **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.  </param>
+        /// <param name="endTime">Filter by end_time when `sort=created_at` or `sort=updated_at`.  **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.  </param>
+        /// <returns>
+        /// A list of the site's items.
+        /// </returns>
+        public Pager<Item> ListItems(string ids = null, int? limit = null, string order = null, string sort = null, DateTime? beginTime = null, DateTime? endTime = null)
+        {
+            var urlParams = new Dictionary<string, object> { };
+            var queryParams = new Dictionary<string, object> { { "ids", ids }, { "limit", limit }, { "order", order }, { "sort", sort }, { "begin_time", beginTime }, { "end_time", endTime } };
+            var url = this.InterpolatePath("/sites/{site_id}/items", urlParams);
+            return Pager<Item>.Build(url, queryParams, this);
+        }
+
+
+        /// <summary>
+        /// Fetch an item <see href="https://partner-docs.recurly.com/v2019-01-08#operation/get_item">get_item api documentation</see>
+        /// </summary>
+        /// <param name="itemId">Item ID or code (use prefix: `code-`, e.g. `code-red`).</param>
+        /// <returns>
+        /// An item.
+        /// </returns>
+        /// <exception cref="Recurly.Errors.ApiError">Thrown when the request is invalid.</exception>
+        public Invoice GetItem(string itemId)
+        {
+            var urlParams = new Dictionary<string, object> { { "item_id", itemId } };
+            var url = this.InterpolatePath("/sites/{site_id}/items/{item_id}", urlParams);
+            return MakeRequest<Invoice>(Method.GET, url, null, null);
+        }
+
+        /// <summary>
+        /// Fetch an item <see href="https://partner-docs.recurly.com/v2019-01-08#operation/get_item">get_item api documentation</see>
+        /// </summary>
+        /// <param name="itemId">Item ID or code (use prefix: `code-`, e.g. `code-red`).</param>
+        /// <returns>
+        /// An item.
+        /// </returns>
+        /// <exception cref="Recurly.Errors.ApiError">Thrown when the request is invalid.</exception>
+        public Task<Invoice> GetItemAsync(string itemId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var urlParams = new Dictionary<string, object> { { "item_id", itemId } };
+            var url = this.InterpolatePath("/sites/{site_id}/items/{item_id}", urlParams);
+            return MakeRequestAsync<Invoice>(Method.GET, url, null, null, cancellationToken);
+        }
+
+        /// <summary>
         /// List a site's invoices <see href="https://partner-docs.recurly.com/v2019-01-08#operation/list_invoices">list_invoices api documentation</see>
         /// </summary>
         /// <param name="ids">Filter results by their IDs. Up to 200 IDs can be passed at once using  commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.    **Important notes:**    * The `ids` parameter cannot be used with any other ordering or filtering    parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)  * Invalid or unknown IDs will be ignored, so you should check that the    results correspond to your request.  * Records are returned in an arbitrary order. Since results are all    returned at once you can sort the records yourself.  </param>
@@ -1466,7 +1517,7 @@ namespace Recurly
         }
 
         /// <summary>
-        /// List a invoice's line items <see href="https://partner-docs.recurly.com/v2019-01-08#operation/list_invoice_line_items">list_invoice_line_items api documentation</see>
+        /// List an invoice's line items <see href="https://partner-docs.recurly.com/v2019-01-08#operation/list_invoice_line_items">list_invoice_line_items api documentation</see>
         /// </summary>
         /// <param name="invoiceId">Invoice ID or number (use prefix: `number-`, e.g. `number-1000`).</param>
         /// <param name="ids">Filter results by their IDs. Up to 200 IDs can be passed at once using  commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.    **Important notes:**    * The `ids` parameter cannot be used with any other ordering or filtering    parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)  * Invalid or unknown IDs will be ignored, so you should check that the    results correspond to your request.  * Records are returned in an arbitrary order. Since results are all    returned at once you can sort the records yourself.  </param>
